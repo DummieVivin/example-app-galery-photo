@@ -17,7 +17,8 @@ class Post extends Model
         'title',
         'description',
         'category',
-        'user_id'
+        'user_id',
+        'slug'
     ];
 
     public function setTitleAttribute($value){
