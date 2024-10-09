@@ -75,7 +75,7 @@
                                         </td>
                                         <td class="px-6 py-4 text-right">
                                             <a
-                                                href="{{ route('admin-edit-galeri-photo', [$post->id]) }}"
+                                                href="{{ route('admin-edit-galeri-photo', [$post->slug]) }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                                 Edit
                                             </a>

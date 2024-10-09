@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class GaleriPhotoController extends Controller
 {
@@ -44,20 +45,23 @@ class GaleriPhotoController extends Controller
             'title'      => $validated['title'],
             'category'   => $validated['category'],
             'description'=> $validated['description'],
+            'slug'       => Str::slug($validated['title']),
             'user_id'    => Auth::user()->id
         ]);
         // dd($post);
         return redirect(route('admin-galeri-photo', absolute: false));
     }
 
-    public function edit(string $postId){
-        $post = Post::findOrfail($postId);
-        //Mengembalikan ke halaman view admin
+    public function edit(string $slug){
+        $post = Post::where('slug', $slug)->first();
+        // $post = Post::findOrfail($postId);
+        // //Mengembalikan ke halaman view admin
         return  view('admin.galeri-photo.edit',[
             'pageTitle'    => 'Edit Album',
             'post'         => $post,
             'listCategory' => Category::categories
         ]);
         // dd('alamat mau edit galeri photo', $post);
+        // dd($slug);
     }
 }
