@@ -68,7 +68,13 @@
                                             {{ $post->description }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ __('Belum Ada Gambar') }}
+                                            {{-- {{ asset() $post->images }} --}}
+                                                @foreach ($post->images as $image)
+                                                    <img
+                                                        class="w-14"
+                                                        src="{{ asset('storage/' . $image->path) }}"
+                                                        alt="">
+                                                @endforeach
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $post->category }}
