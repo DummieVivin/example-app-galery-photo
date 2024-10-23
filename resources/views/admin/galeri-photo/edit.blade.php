@@ -7,8 +7,10 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{-- Start Edit Form Galeri Photo --}}
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <form method="POST"
-                              action="{{ route('admin-edit-galeri-photo', $post->id) }}"
+                        <!--Modal body-->
+                        <form
+                              method="POST"
+                              action="{{ route('admin-update-galeri-photo', [$post->slug]) }}"
                               enctype="multipart/form-data"
                               class="p-4 md:p-5">
                             @csrf

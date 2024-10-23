@@ -86,4 +86,31 @@ class GaleriPhotoController extends Controller
         // dd('alamat mau edit galeri photo', $post);
         // dd($slug);
     }
+
+    public function updateGaleri(Request $request, Post $post){
+       //Logic for Update
+       $validated = $request->validate([
+        'title'       => 'required',
+        'category'    => 'required',
+        'description' => 'required',
+        'images'      => 'required',
+        'images.*'    => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],[
+        'title.required'       => 'Judul wajib di isi',
+        'description.required' => 'Deskripsi wajib di isi',
+        'images.required'      => 'Photo Album Galeri Photo wajib di isi'
+        ]);
+
+        $post->update([
+            'title'      => $validated['title'],
+            'category'   => $validated['category'],
+            'description'=> $validated['description'],
+            'slug'       => Str::slug($validated['title']),
+            'user_id'    => Auth::user()->id
+        ]);
+
+        dd($post);
+
+
+    }
 }
