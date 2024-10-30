@@ -35,10 +35,20 @@
                                            Upload multiple files
                                     </label>
                                     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                           id="multiple_files"
-                                           name="multiple_files[]"
+                                           id="images"
+                                           name="images[]"
                                            type="file"
                                            multiple>
+                                    <div class="mt-2">
+                                        @forelse ($images as $image)
+                                        <img
+                                        class="w-14 h-20 w-20"
+                                        src="{{ asset('storage/' . $image->path) }}"
+                                        alt="">
+                                        <p> {{ $image->name }} </p>
+                                        @empty
+                                        @endforelse
+                                    </div>
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="category"

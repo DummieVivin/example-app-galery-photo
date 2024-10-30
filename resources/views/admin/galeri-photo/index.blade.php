@@ -71,7 +71,7 @@
                                             {{-- {{ asset() $post->images }} --}}
                                                 @foreach ($post->images as $image)
                                                     <img
-                                                        class="w-14"
+                                                        class="w-14 h-20 w-20"
                                                         src="{{ asset('storage/' . $image->path) }}"
                                                         alt="">
                                                 @endforeach

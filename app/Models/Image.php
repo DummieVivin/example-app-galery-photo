@@ -12,7 +12,7 @@ class Image extends Model
     protected $table = 'images';
 
     protected $fillable = [
-        'title',
+        'name', //Ini tadi title
         'path',
         'post_id'
     ];
