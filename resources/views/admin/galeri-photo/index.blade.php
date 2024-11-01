@@ -47,9 +47,9 @@
                                         <th scope="col" class="px-6 py-3">
                                             Gambar
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
+                                        {{-- <th scope="col" class="px-6 py-3">
                                             Kategori
-                                        </th>
+                                        </th> --}}
                                         <th scope="col" class="px-6 py-3">
                                             <span class="sr-only">Edit</span>
                                         </th>
@@ -68,17 +68,22 @@
                                             {{ $post->description }}
                                         </td>
                                         <td class="px-6 py-4">
+                                            @if ( count ( $post->images ) > 0 )
+                                                Gambar({{count ( $post->images )}})
+                                            @else
+                                                Gambar(0)
+                                            @endif
                                             {{-- {{ asset() $post->images }} --}}
-                                                @foreach ($post->images as $image)
+                                                {{-- @foreach ($post->images as $image)
                                                     <img
-                                                        class="w-14 h-20 w-20"
+                                                        class="h-20 w-20"
                                                         src="{{ asset('storage/' . $image->path) }}"
                                                         alt="">
-                                                @endforeach
+                                                @endforeach --}}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        {{-- <td class="px-6 py-4">
                                             {{ $post->category }}
-                                        </td>
+                                        </td> --}}
                                         <td class="px-6 py-4 text-right">
                                             <a
                                                 href="{{ route('admin-edit-galeri-photo', [$post->slug]) }}"

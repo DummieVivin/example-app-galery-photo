@@ -104,6 +104,7 @@ class GaleriPhotoController extends Controller
     }
 
     public function updateGaleri(Request $request, Post $post){
+
        //Logic for Update
        $validated = $request->validate([
         'title'       => 'required',
@@ -124,19 +125,39 @@ class GaleriPhotoController extends Controller
             'slug'       => Str::slug($validated['title']),
             'user_id'    => Auth::user()->id
         ]);
-        // dd($post);
+
+        //Mengambil Request Input Image
+        $checkBoxImages = Image::whereIn( 'id', $request->input('image') ??  [])->get();
+        // dd($checkBoxImages);
+
+        //Melakukan Looping untuk membongkar array checkBoxImages
+        if($checkBoxImages){
+            foreach ($checkBoxImages as $image) {
+                //Melakukan penghapusan file image di storage
+                Storage::disk('public')->delete($image->path);
+                //Menghapus objek file image dari table images
+                $image->delete();
+                // dd('Berhasil menghapus gambar yang di checklist');
+            }
+        }
+
+        //Jika ada request file image
         if ($request->hasFile('images')) {
-            // Mengambil seluruh gambar berdasarkan post_id
-            $images = Image::where('post_id', $post->id)->get();
 
             //Melakukan Looping / membongkar objek $images
+            foreach ($request->file('images') as $file) {
 
-            foreach ($images as $image) {
-                //Objek Image akan kita hapus
-                Storage::disk('public')->delete($image->path);
+                //Pengecekan valid file
+                if ($file->isValid()){
+                    //Ambil Original nama filenya
+                    $originalName = $file->getClientOriginalName      ();
 
-                //Menghapus Alamat path image dari kolom path di table
-                $image->delete();
+                    //Membuat nama file menjadi unik
+                    $uniqueName = time() . '_' . $originalName;
+
+                    //Menyimpan file ke storage disk public
+                    $file->storeAs('public/images', $uniqueName);
+                    }
 
                 //Mengambil request file images
                 foreach ($request->file('images') as $file){
