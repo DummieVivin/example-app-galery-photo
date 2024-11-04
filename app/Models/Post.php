@@ -22,6 +22,11 @@ class Post extends Model
         'slug'
     ];
 
+    //Membuat function untuk relasi antara post dengan contents
+    public function contents(){
+        return $this->hasMany(Content::class);
+    }
+
     public function setTitleAttribute($value){
         $this->attributes['title']= $value;
 
@@ -32,5 +37,5 @@ class Post extends Model
 
     public function images(){
         return $this->hasMany(Image::class);
-    }   
+    }
 }

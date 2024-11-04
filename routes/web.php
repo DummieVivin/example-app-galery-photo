@@ -3,7 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
-use App\Http\Controllers\Admin\GaleriPhotoController;
+use App\Http\Controllers\Admin\{
+    GaleriPhotoController,
+    NewsPortalController
+    };
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 
 Route::get('/', function () {
@@ -22,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('admin-store-galeri-photo', [GaleriPhotoController::class, 'store'])->name('admin-store-galeri-photo');
     Route::get('admin-edit-galeri-photo/{post:slug}', [GaleriPhotoController::class, 'edit'])->name('admin-edit-galeri-photo');
     Route::put('admin-update-galeri-photo/{post:slug}', [GaleriPhotoController::class, 'updateGaleri'])->name('admin-update-galeri-photo');
+    Route::get('admin-newsportal', [NewsPortalController::class, 'index'])->name('admin-newsportal');
 
     Route::get('admin-galeri-photo-with-vue', [GaleriPhotoController::class, 'getPost'])->name('admin-galeri-photo-with-vue');
     // Route::get('admin-edit-galeri-photo/{post}', [GaleriPhotoController::class, 'edit'])->name('admin-edit-galeri-photo');
