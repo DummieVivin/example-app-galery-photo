@@ -103,6 +103,15 @@ class GaleriPhotoController extends Controller
         // dd($slug);
     }
 
+    public function show(Post $post){
+        $album = Post::where('id', $post->id)->with('images')->first();
+        dd($album);
+        return view('admin.galeri-photo.show' , [
+            'pageTitle' => 'Show Galeri',
+            'album'     => $post,
+        ]);
+    }
+
     public function updateGaleri(Request $request, Post $post){
 
        //Logic for Update
@@ -150,7 +159,7 @@ class GaleriPhotoController extends Controller
                 //Pengecekan valid file
                 if ($file->isValid()){
                     //Ambil Original nama filenya
-                    $originalName = $file->getClientOriginalName      ();
+                    $originalName = $file->getClientOriginalName();
 
                     //Membuat nama file menjadi unik
                     $uniqueName = time() . '_' . $originalName;
@@ -194,4 +203,5 @@ class GaleriPhotoController extends Controller
             return redirect(route('admin-galeri-photo', absolute: false));
         }
     }
+
 }
