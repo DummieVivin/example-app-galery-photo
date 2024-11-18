@@ -15,4 +15,11 @@ class NewsPortalController extends Controller
             'newsportals'   => Post::with('contents')->get()
         ]);
     }
+
+    public function create(){
+        return view('admin.newsportals.create', [
+            'pageTitle'     => 'Form News Portal'
+
+        ]);
+    }
 }
