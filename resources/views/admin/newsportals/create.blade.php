@@ -11,7 +11,10 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <!-- Modal body -->
-                    <form class="p-4 md:p-5">
+                    <form action="{{ route('admin-newsportal-store')}}"
+                          class="p-4 md:p-5"
+                          method="POST">
+                    @csrf
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
                                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -56,18 +59,19 @@
                                               name="descriptions[]"
                                               v-model="item.description"
                                               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                              placeholder="Write product content here">
+                                              :placeholder="'Write description content #'+ (index + 1)">
                                     </textarea>
 
                                     {{-- Start div button --}}
                                     <div class="flex mx-2">
-                                        <button type="button"
+                                        <button v-if="index == items.length - 1 && item.description.trim() !== ''"
+                                                type="button"
                                                 @click="add">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                               </svg>
                                         </button>
-                                        <button v-if="item.description.trim() == ''"
+                                        <button v-if="items.length > 1 && index === items.length - 1 && item.description.trim() == ''"
                                                 type="button"
                                                 @click="remove(index)">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
