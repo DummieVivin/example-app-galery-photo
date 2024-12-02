@@ -105,7 +105,6 @@ class GaleriPhotoController extends Controller
 
     public function show(Post $post){
         $album = Post::where('id', $post->id)->with('images')->first();
-        dd($album);
         return view('admin.galeri-photo.show' , [
             'pageTitle' => 'Show Galeri',
             'album'     => $post,
