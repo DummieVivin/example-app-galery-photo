@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('admin-edit-galeri-photo/{post:slug}', [GaleriPhotoController::class, 'edit'])->name('admin-edit-galeri-photo');
     Route::get('admin-show-galeri-photo/{post:slug}', [GaleriPhotoController::class, 'show'])->name('admin-show-galeri-photo');
     Route::put('admin-update-galeri-photo/{post:slug}', [GaleriPhotoController::class, 'updateGaleri'])->name('admin-update-galeri-photo');
+    Route::delete('admin-delete-album/{post}', [GaleriPhotoController::class, 'destroy'])->name('admin-delete-album');
+
     Route::get('admin-newsportal', [NewsPortalController::class, 'index'])->name('admin-newsportal');
     Route::post('admin-newsportal-store', [NewsPortalController::class, 'store'])->name('admin-newsportal-store');
     Route::get('admin-create-newsportal', [NewsPortalController::class, 'create'])->name('admin-create-news-portal');

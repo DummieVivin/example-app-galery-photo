@@ -111,6 +111,14 @@ class GaleriPhotoController extends Controller
         ]);
     }
 
+    public function destroy(Post $post){
+        $post = Post::where('id', $post->id)->with('images')->first();
+
+        $post->delete();
+        return redirect(route('admin-galeri-photo', absolute: false));
+
+    }
+
     public function updateGaleri(Request $request, Post $post){
 
        //Logic for Update
@@ -202,5 +210,6 @@ class GaleriPhotoController extends Controller
             return redirect(route('admin-galeri-photo', absolute: false));
         }
     }
+
 
 }

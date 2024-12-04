@@ -92,15 +92,26 @@
                                             </a>
                                             <a
                                                 href="{{ route('admin-show-galeri-photo', [$post->slug]) }}"
-                                                class="font-medium text-gray-600 dark:text-gray-500 hover:underline">
+                                                class="font-medium text-green-600 dark:text-green-500 hover:underline">
                                                 View
                                             </a>
+                                            <form method="POST" action="{{ route('admin-delete-album', $post) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <a href="route('admin-delete-album', $post)"
+                                                   onclick="event.preventDefault(); this.closest('form').submit();"
+                                                   class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                                    {{ __('Delete') }}
+                                                </a>
+                                            </form>
                                         </td>
                                     </tr>
                                     @empty
+
                                 <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
                                      <span class="font-medium">Galeri Photo Belum adaa...</span>
                                 </div>
+
                                  @endforelse
 
                                 </tbody>
