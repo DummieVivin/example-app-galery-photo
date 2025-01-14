@@ -112,10 +112,17 @@ class GaleriPhotoController extends Controller
     }
 
     public function destroy(Post $post){
-        $post = Post::where('id', $post->id)->with('images')->first();
+        $album = Post::with('images')->find($post->id);
+        foreach ($album->images as $image) {
+            //Melakukan penghapusan file image di storage
+            Storage::disk('public')->delete($image->path);
+            //Menghapus objek file image dari table images
+            $image->delete();
+            // dd('Berhasil menghapus gambar yang di checklist');
+        }
 
         $post->delete();
-        return redirect(route('admin-galeri-photo', absolute: false));
+        return redirect(route('admin-galeri-photo', absolute: false))->with('status', 'deleted-successfuly');
 
     }
 

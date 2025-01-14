@@ -12,25 +12,34 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    {{-- {{ __("Halo, Kamu masuk dibagian Galeri Photo Admin") }} --}}
-                    {{-- Buat memunculkan variable title --}}
-                    {{-- @foreach ($listPost as $post)
-                        <li>{{ $post->title }}</li>
-                        @endforeach --}}
-                    {{-- {{$listPost['title']}} //harus bikin ['listPost' => Post::first()] di GaleriPhotoController.php--}}
-
                     {{-- Start Tombol Tambah --}}
-                    <button
+                    <div class="flex items-center gap-4">
+                        <button
                         type="button"
                         class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <a href="{{ route('admin-create-galeri-photo') }}">
                                 Tambah Galeri Photo
                             </a>
                     </button>
+                    @if (session('status') === 'deleted-successfuly')
+                        <div x-data="{ show: true }"
+                             x-show="show"
+                             x-transition
+                             x-init="setTimeout(() => show = false, 2500)"
+                             class="flex items-center p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            <span class="sr-only">Info</span>
+                                <div>
+                                    <span class="font-medium">Berhasil menghapus!</span>
+                                </div>
+                        </div>
+                    @endif
+                </div>
                     {{-- End Tombol Tambah --}}
 
                     {{-- Start Display Data Product --}}
-
                         <div class="mt-2 relative overflow-x-auto shadow-md sm:rounded-lg">
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -99,7 +108,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <a href="route('admin-delete-album', $post)"
-                                                   onclick="event.preventDefault(); this.closest('form').submit();"
+                                                   onclick="event.preventDefault(); if(confirm('Yakin Untuk Dihapus?')) this.closest('form').submit();"
                                                    class="font-medium text-red-600 dark:text-red-500 hover:underline">
                                                     {{ __('Delete') }}
                                                 </a>
