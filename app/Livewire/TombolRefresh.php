@@ -17,5 +17,6 @@ class TombolRefresh extends Component
     //Membuat event click
     public function btnRefresh(){
         $this->btnRefreshOn=true;
+        $this->dispatch('refresh-album');
     }
 }

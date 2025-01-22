@@ -1,5 +1,5 @@
 <div>
-    <div class="m-2 flex gap-2">
+    <div class="pb-2 flex gap-2">
         <button
            wire:click="btnRefresh"
            type="button"
