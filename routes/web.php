@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\{
     GaleriPhotoController,
-    NewsPortalController
-    };
+    NewsPortalController,
+    ProjectController
+};
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 
 Route::get('/', function () {
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('admin-create-newsportal', [NewsPortalController::class, 'create'])->name('admin-create-news-portal');
 
     Route::get('admin-galeri-photo-with-vue', [GaleriPhotoController::class, 'getPost'])->name('admin-galeri-photo-with-vue');
+
+    Route::get('admin-projects', [ProjectController::class, 'index'])->name('admin-projects');
     // Route::get('admin-edit-galeri-photo/{post}', [GaleriPhotoController::class, 'edit'])->name('admin-edit-galeri-photo');
 
     //Route User

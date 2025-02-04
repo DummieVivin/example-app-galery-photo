@@ -22,18 +22,28 @@
                     <x-nav-link :href="route('admin-galeri-photo')" :active="request()->routeIs('admin-galeri-photo')">
                         {{ __('Galeri Photo') }}
                     </x-nav-link>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('admin-newsportal')" :active="request()->routeIs('admin-newsportal')">
-                            {{ __('News Portal') }}
-                        </x-nav-link>
-                    </div>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin-newsportal')" :active="request()->routeIs('admin-newsportal')">
+                        {{ __('News Portal') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin-projects')" :active="request()->routeIs('admin-projects')">
+                        {{ __('Projects') }}
+                    </x-nav-link>
+                </div>
+
                 @else
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('user-dashboard')" :active="request()->routeIs('user-dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
                 @endif
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
